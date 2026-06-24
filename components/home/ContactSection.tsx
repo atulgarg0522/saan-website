@@ -198,8 +198,8 @@ export default function ContactSection() {
                   </div>
                   <div>
                     <p className="text-xs font-bold uppercase tracking-wider text-saan-muted font-mono">Email</p>
-                    <a href="mailto:atul@saantechnology.com" className="text-sm font-semibold text-saan-text hover:text-saan-purple-light transition-colors">
-                      atul@saantechnology.com
+                    <a href="mailto:nehagarg@saandigital.com" className="text-sm font-semibold text-saan-text hover:text-saan-purple-light transition-colors">
+                      nehagarg@saandigital.com
                     </a>
                   </div>
                 </div>
@@ -211,12 +211,12 @@ export default function ContactSection() {
                   <div>
                     <p className="text-xs font-bold uppercase tracking-wider text-saan-muted font-mono">LinkedIn</p>
                     <Link
-                      href="https://linkedin.com"
+                      href="https://www.linkedin.com/in/atulgarg52/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-sm font-semibold text-saan-text hover:text-saan-teal-light transition-colors"
                     >
-                      linkedin.com/in/atulgarg
+                      linkedin.com/in/atulgarg52
                     </Link>
                   </div>
                 </div>
@@ -228,12 +228,12 @@ export default function ContactSection() {
                   <div>
                     <p className="text-xs font-bold uppercase tracking-wider text-saan-muted font-mono">GitHub</p>
                     <Link
-                      href="https://github.com"
+                      href="https://github.com/saandigital"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-sm font-semibold text-saan-text hover:text-saan-amber transition-colors"
                     >
-                      github.com/saantechnology
+                      github.com/saandigital
                     </Link>
                   </div>
                 </div>
