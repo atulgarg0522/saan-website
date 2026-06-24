@@ -1,6 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 
+export async function GET(req: NextRequest) {
+  const slug = req.nextUrl.searchParams.get('slug')
+  if (!slug) return NextResponse.json({ count: 0 })
+
+  try {
+    const supabase = createClient()
+    const { count } = await supabase
+      .from('likes')
+      .select('*', { count: 'exact', head: true })
+      .eq('post_slug', slug)
+    return NextResponse.json({ count: count || 0 })
+  } catch {
+    return NextResponse.json({ count: 0 })
+  }
+}
+
 export async function POST(req: NextRequest) {
   try {
     const supabase = createClient()

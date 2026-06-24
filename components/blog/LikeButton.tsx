@@ -19,6 +19,12 @@ export default function LikeButton({ postSlug, initialLikesCount }: LikeButtonPr
   const [showLoginModal, setShowLoginModal] = useState(false)
 
   useEffect(() => {
+    // Fetch real likes count from API
+    fetch(`/api/likes?slug=${encodeURIComponent(postSlug)}`)
+      .then(r => r.json())
+      .then(d => { if (typeof d.count === 'number') setLikesCount(d.count) })
+      .catch(() => {})
+
     // Get session
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session)

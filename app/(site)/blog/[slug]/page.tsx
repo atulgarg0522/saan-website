@@ -4,7 +4,6 @@ import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import { client, urlFor } from '@/sanity/sanity.client'
 import { postBySlugQuery, relatedPostsQuery, allPostsQuery } from '@/sanity/queries/posts'
-import { createClient } from '@/lib/supabase/server'
 import { Post } from '@/types'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -155,42 +154,21 @@ const portableTextComponents = {
 async function getPostData(slug: string) {
   let post: Post | null = null
   let relatedPosts: Post[] = []
-  let likesCount = 0
 
   try {
     post = await client.fetch<Post>(postBySlugQuery, { slug })
     if (!post) return null
 
-    // Get categories ids to find related posts
     const categoryRefs = post.categories?.map((c: any) => c._id) || []
-    
     relatedPosts = await client.fetch<Post[]>(relatedPostsQuery, { currentSlug: slug, categoryRefs })
   } catch (error) {
     console.error('Error fetching post detail data from Sanity:', error)
     return null
   }
 
-  // Fetch likes separately and catch errors so it doesn't break post rendering
-  try {
-    const isSupabaseConfigured = process.env.NEXT_PUBLIC_SUPABASE_URL && !process.env.NEXT_PUBLIC_SUPABASE_URL.includes('dummy')
-    if (isSupabaseConfigured) {
-      const supabase = createClient()
-      const { count, error } = await supabase
-        .from('likes')
-        .select('*', { count: 'exact', head: true })
-        .eq('post_slug', slug)
-      
-      if (error) throw error
-      likesCount = count || 0
-    }
-  } catch (error) {
-    console.error('Error fetching like count from Supabase (using mocks/fallback):', error)
-  }
-
   return {
     post,
     relatedPosts: relatedPosts || [],
-    likesCount,
   }
 }
 
@@ -202,7 +180,7 @@ export default async function BlogPostPage({ params }: PostPageProps) {
     return notFound()
   }
 
-  const { post, relatedPosts, likesCount } = data
+  const { post, relatedPosts } = data
   const headings = extractHeadings(post.body || [])
 
   const publishedDate = post.publishedAt ? new Date(post.publishedAt) : new Date()
@@ -336,7 +314,7 @@ export default async function BlogPostPage({ params }: PostPageProps) {
 
               {/* Footer Likes & Share */}
               <div className="flex flex-wrap items-center justify-between gap-6 py-6 border-y border-saan-border/40 my-12">
-                <LikeButton postSlug={post.slug} initialLikesCount={likesCount} />
+                <LikeButton postSlug={post.slug} initialLikesCount={0} />
                 <ShareButtons title={post.title} slug={post.slug} />
               </div>
 
