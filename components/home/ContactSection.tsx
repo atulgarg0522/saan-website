@@ -228,12 +228,12 @@ export default function ContactSection() {
                   <div>
                     <p className="text-xs font-bold uppercase tracking-wider text-saan-muted font-mono">GitHub</p>
                     <Link
-                      href="https://github.com/saandigital"
+                      href="https://github.com/atulgarg0522/SaanDigitaltech"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-sm font-semibold text-saan-text hover:text-saan-amber transition-colors"
                     >
-                      github.com/saandigital
+                      github.com/atulgarg0522/SaanDigitaltech
                     </Link>
                   </div>
                 </div>
