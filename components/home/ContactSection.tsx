@@ -88,7 +88,7 @@ export default function ContactSection() {
                 <AlertCircle className="h-5 w-5 shrink-0 mt-0.5" />
                 <div>
                   <p className="font-semibold">Failed to send message.</p>
-                  <p className="text-rose-400/80 mt-1">Please try again or email directly at atul@saantechnology.com.</p>
+                  <p className="text-rose-400/80 mt-1">Please try again or email directly at nehagarg@saandigital.com.</p>
                 </div>
               </div>
             )}
